@@ -1,0 +1,18 @@
+{
+  "version": "0.2",
+  "minimum_fmos": 0.25,
+  "hard_rules": [
+    "The problem names who bears it and an observable condition with a metric, a baseline figure and an evidence record.",
+    "The outcome sought has a metric, a target figure and a date.",
+    "The causal chain has at least one link, and every link carries evidence records that exist.",
+    "The intervention point names one causal link that exists in the chain.",
+    "The prime commercial opportunity names a customer, that customer's observable condition, the core functionality, the payer, the payer's relationship to the people who bear the problem, and an evidence record for willingness to pay.",
+    "The outcome link states the mechanism, the scale assumption, a numeric contribution to the target, and the arithmetic, and carries evidence records that exist.",
+    "Every requirement names the causal link it acts on, and that link exists.",
+    "Every requirement has exactly one stated bottleneck and intervention.",
+    "Every requirement traces to one or more existing components and evidence records.",
+    "Every evidence record is sourced or has a named falsification test.",
+    "FMOS equals (price_ceiling - cost_floor) / cost_floor and is at least 25%.",
+    "No open item may be represented as resolved."
+  ]
+}

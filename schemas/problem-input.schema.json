@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IVE problem input",
+  "description": "A social problem someone wants to see fixed, stated so that a venture can be derived from it.",
+  "type": "object",
+  "required": ["problem", "who_bears_it", "observable_condition", "outcome_sought", "constraints"],
+  "properties": {
+    "problem": {"type": "string", "minLength": 10, "description": "The social problem in one sentence, for example 'The cost of housing in London is too high for people on ordinary incomes.'"},
+    "who_bears_it": {"type": "string", "minLength": 3, "description": "The people who carry the harm today."},
+    "observable_condition": {
+      "type": "object",
+      "required": ["statement", "metric", "baseline"],
+      "properties": {
+        "statement": {"type": "string", "minLength": 15, "description": "What you can see and measure today."},
+        "metric": {"type": "string", "minLength": 3},
+        "baseline": {"type": "number"},
+        "unit": {"type": "string"},
+        "source": {"type": "string", "description": "Where the baseline comes from, or 'assumption' if unsourced."}
+      }
+    },
+    "outcome_sought": {
+      "type": "object",
+      "required": ["statement", "metric", "target", "by_date"],
+      "properties": {
+        "statement": {"type": "string", "minLength": 10, "description": "What 'fixed' means."},
+        "metric": {"type": "string", "minLength": 3},
+        "target": {"type": "number"},
+        "unit": {"type": "string"},
+        "by_date": {"type": "string", "pattern": "^[0-9]{4}(-[0-9]{2})?(-[0-9]{2})?$"}
+      }
+    },
+    "constraints": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "evidence": {"type": "array", "items": {"type": "object"}}
+  }
+}

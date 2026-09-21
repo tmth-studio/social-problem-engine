@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IVE problem-first architecture artifact",
+  "type": "object",
+  "required": ["schema_version", "problem", "causal_chain", "intervention_point", "prime_commercial_opportunity", "outcome_link", "venture", "requirements", "components", "evidence", "financial_model", "open_items"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "problem": {
+      "type": "object",
+      "required": ["statement", "who_bears_it", "observable_condition", "outcome_sought"],
+      "properties": {
+        "statement": {"type": "string", "minLength": 10},
+        "who_bears_it": {"type": "string", "minLength": 3},
+        "observable_condition": {"type": "object", "required": ["statement", "metric", "baseline", "evidence_id"]},
+        "outcome_sought": {"type": "object", "required": ["statement", "metric", "target", "by_date"]}
+      }
+    },
+    "causal_chain": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Ordered links from the observable condition back to the cause the venture will act on. Each link states why the condition persists.",
+      "items": {"type": "object", "required": ["id", "cause", "effect", "evidence_ids"]}
+    },
+    "intervention_point": {
+      "type": "object",
+      "required": ["causal_link_id", "statement", "why_here"],
+      "description": "The one link in the chain the venture acts on, and why that link rather than another."
+    },
+    "prime_commercial_opportunity": {
+      "type": "object",
+      "required": ["customer", "customer_observable_condition", "core_functionality", "payer", "payer_relationship", "willingness_to_pay_evidence_id"],
+      "properties": {
+        "payer_relationship": {"enum": ["same_as_bearer", "different_from_bearer", "mixed"]}
+      }
+    },
+    "outcome_link": {
+      "type": "object",
+      "required": ["mechanism", "scale_assumption", "contribution_to_target", "contribution_unit", "arithmetic", "evidence_ids"],
+      "description": "How the venture at scale moves the outcome metric, with the arithmetic shown."
+    },
+    "venture": {"type": "string", "minLength": 3},
+    "requirements": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "statement", "bottleneck", "intervention", "causal_link_id", "component_ids", "evidence_ids", "verification"]}},
+    "components": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "name", "purpose"]}},
+    "evidence": {"type": "array", "items": {"type": "object", "required": ["id", "claim", "status", "source_or_test"]}},
+    "financial_model": {"type": "object", "required": ["price_ceiling", "cost_floor", "fmos"]},
+    "open_items": {"type": "array"}
+  }
+}

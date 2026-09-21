@@ -1,0 +1,107 @@
+{
+  "schema_version": "0.2",
+  "problem": {
+    "statement": "The cost of housing in London is too high for people on ordinary incomes.",
+    "who_bears_it": "Private renters in London on median or below-median household incomes.",
+    "observable_condition": {
+      "statement": "Median private rent in London takes about a third of median gross household income.",
+      "metric": "Median monthly rent as a share of median gross monthly household income, London",
+      "baseline": 0.35,
+      "unit": "ratio",
+      "evidence_id": "E1"
+    },
+    "outcome_sought": {
+      "statement": "Median private rent in London falls to no more than 30 per cent of median gross household income.",
+      "metric": "Median monthly rent as a share of median gross monthly household income, London",
+      "target": 0.30,
+      "unit": "ratio",
+      "by_date": "2035"
+    }
+  },
+  "causal_chain": [
+    {
+      "id": "L1",
+      "cause": "New homes in London are completed more slowly than new households form.",
+      "effect": "Rents rise faster than incomes.",
+      "evidence_ids": ["E2"]
+    },
+    {
+      "id": "L2",
+      "cause": "Small sites (under 0.25 hectares) deliver fewer homes than their planned share because the fixed pre-construction cost of a scheme (planning, surveys, design, utilities) is high relative to a scheme of two to ten homes.",
+      "effect": "Fewer homes are completed than the plan assumes.",
+      "evidence_ids": ["E3"]
+    },
+    {
+      "id": "L3",
+      "cause": "Each small-site scheme buys a bespoke pre-construction package because no standard, pre-accepted package exists for common site types.",
+      "effect": "The fixed pre-construction cost per scheme stays high.",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "intervention_point": {
+    "causal_link_id": "L3",
+    "statement": "Replace the bespoke pre-construction package with a standard package that a borough has accepted in advance for a defined site type.",
+    "why_here": "L1 and L2 need policy or land-market change that a private venture cannot supply within the constraints. L3 is a cost structure a private venture can change on its own."
+  },
+  "prime_commercial_opportunity": {
+    "customer": "Small builders and SME developers building schemes of two to ten homes on small sites in London.",
+    "customer_observable_condition": "A small scheme spends 12 to 18 months and £60,000 to £90,000 on pre-construction work before any revenue, and may still be refused consent.",
+    "core_functionality": "Takes a small site of a defined type to a buildable consent for a fixed price and a fixed time, using a standard package the borough has accepted in advance.",
+    "payer": "The SME developer, per scheme.",
+    "payer_relationship": "different_from_bearer",
+    "willingness_to_pay_evidence_id": "E5"
+  },
+  "outcome_link": {
+    "mechanism": "Lower fixed cost per scheme makes more small sites viable, so more homes are completed, so rents rise more slowly than they otherwise would.",
+    "scale_assumption": "500 schemes a year at six homes each, 3,000 additional homes a year, sustained for ten years.",
+    "contribution_to_target": 0.005,
+    "contribution_unit": "ratio points off the rent-to-income ratio by 2035",
+    "arithmetic": "3,000 homes a year for ten years = 30,000 homes = 0.8 per cent of a London stock of about 3.7 million. With a rent response of about minus 1.5 per cent for each 1 per cent of extra stock, rents fall about 1.2 per cent. 0.35 x 0.012 = 0.004, rounded to 0.005. The gap to target is 0.05, so this venture alone closes about a tenth of it.",
+    "evidence_ids": ["E6", "E7"]
+  },
+  "venture": "InfillWorks",
+  "requirements": [
+    {
+      "id": "R1",
+      "statement": "Deliver a buildable consent for a small site at a cost per scheme well below the bespoke route.",
+      "bottleneck": "Every scheme pays for its own architect, planner and surveys, so professional hours per scheme do not fall with volume.",
+      "intervention": "Sort small sites into a small number of site types and reuse one standard package per type, so most professional hours are spent once per type rather than once per scheme.",
+      "causal_link_id": "L3",
+      "component_ids": ["C1", "C2"],
+      "evidence_ids": ["E4", "E8"],
+      "verification": "Cost 20 synthetic schemes through the standard route and the bespoke route and confirm the standard route costs at least 40 per cent less per scheme."
+    },
+    {
+      "id": "R2",
+      "statement": "Remove the developer's doubt that a small scheme will get consent.",
+      "bottleneck": "Consent risk sits with each scheme, so the developer discounts the value of any pre-construction package.",
+      "intervention": "Agree the standard package with the borough in advance for each site type, so consent risk sits with the standard and not the site.",
+      "causal_link_id": "L3",
+      "component_ids": ["C2", "C3"],
+      "evidence_ids": ["E5", "E9"],
+      "verification": "Ten developer interviews in which the developer states a price for the package with and without borough pre-acceptance; the difference is the value of R2."
+    }
+  ],
+  "components": [
+    {"id": "C1", "name": "Site-type library", "purpose": "Classifies a small site into one of a fixed set of types with known constraints."},
+    {"id": "C2", "name": "Standard pre-construction package", "purpose": "The design, planning and survey package reused for every site of a type."},
+    {"id": "C3", "name": "Borough pre-acceptance agreement", "purpose": "The borough's advance acceptance of the standard package for a site type, so a conforming scheme gets consent on a fixed timetable."}
+  ],
+  "evidence": [
+    {"id": "E1", "claim": "Median private rent in London is about 35 per cent of median gross household income.", "status": "assumption", "source_or_test": "Check against the ONS private rental affordability release for England, London row, latest year.", "falsification_test": "The ONS figure for London differs from 0.35 by more than 0.03."},
+    {"id": "E2", "claim": "London completes fewer homes a year than its plan target.", "status": "assumption", "source_or_test": "Check GLA housing completions against the London Plan target for the last three years.", "falsification_test": "Completions met or exceeded the target in two of the last three years."},
+    {"id": "E3", "claim": "Small sites deliver below their planned share of London homes.", "status": "assumption", "source_or_test": "Check the GLA small sites monitoring against London Plan Policy H2 targets by borough.", "falsification_test": "Small-site completions met the Policy H2 target in most boroughs."},
+    {"id": "E4", "claim": "Pre-construction cost for a two-to-ten-home scheme is £60,000 to £90,000 and does not fall with the developer's volume.", "status": "assumption", "source_or_test": "Ten SME developer interviews with cost breakdowns.", "falsification_test": "Median reported pre-construction cost falls outside £40,000 to £120,000, or falls by more than 30 per cent for developers doing ten or more schemes a year."},
+    {"id": "E5", "claim": "SME developers will pay a fixed fee for a pre-accepted package.", "status": "assumption", "source_or_test": "Price-stating interviews with ten SME developers.", "falsification_test": "Fewer than six of ten state a price at or above the cost floor."},
+    {"id": "E6", "claim": "London's dwelling stock is about 3.7 million.", "status": "assumption", "source_or_test": "Check the DLUHC dwelling stock estimate for London, latest year.", "falsification_test": "The published figure differs from 3.7 million by more than 0.3 million."},
+    {"id": "E7", "claim": "Rents fall about 1.5 per cent for each 1 per cent increase in housing stock.", "status": "assumption", "source_or_test": "Literature review of published rent-supply elasticities for UK cities.", "falsification_test": "Published estimates cluster outside the range minus 0.5 to minus 3."},
+    {"id": "E8", "claim": "Most small sites in London fall into fewer than ten repeatable site types.", "status": "assumption", "source_or_test": "Classify 200 small-site planning applications from two boroughs.", "falsification_test": "More than 30 per cent of sites do not fit any of ten types."},
+    {"id": "E9", "claim": "A borough will accept a standard package in advance for a site type.", "status": "assumption", "source_or_test": "Two borough planning officers asked whether a design code or local development order route is open for a defined site type.", "falsification_test": "Both boroughs say no route exists without a plan change."}
+  ],
+  "financial_model": {"price_ceiling": 60000, "cost_floor": 30000, "fmos": 1.0},
+  "open_items": [
+    {"id": "OPEN-1", "statement": "Replace every placeholder figure with a sourced one.", "status": "open"},
+    {"id": "OPEN-2", "statement": "The venture alone closes about a tenth of the gap to target. Name the other interventions needed or reset the target.", "status": "open"},
+    {"id": "OPEN-3", "statement": "Confirm the borough pre-acceptance route with a real borough.", "status": "open"}
+  ]
+}
