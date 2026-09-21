@@ -1,6 +1,6 @@
 # Problem-first architecture engine — prototype
 
-**Start with a problem you want fixed. End with a venture that could pay to fix it, and a record of how much it would help.**
+**Go from social problem to profitable business solution.**
 
 An experimental, portable method. It turns a stated social problem — the cost of housing, say — into an auditable venture architecture. It then checks that architecture against explicit published rules. It is the problem-first version of the [IVE Architecture Engine](https://github.com/tmth-studio/ive-architecture-engine), which starts one step later, from a venture brief.
 
